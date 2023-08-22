@@ -11,14 +11,6 @@ module.exports.getAllUtilisateurs = async (req, res) => {
         if (error) throw error;
 
        res.status(200).json(results.rows);
-        //console.log(results.rows);
-
-        /*
-            //const 
-        const data = results.rows
-        const noms = data.map(item => item.nom);
-        console.log(noms);
-        */
     })
 }
 

@@ -52,12 +52,16 @@ module.exports.updateTypeUtilisateur = async (req, res) => {
     const noTypeUtilisateurFound = !result.rows.length;
 
     if (noTypeUtilisateurFound) {
-        res.send("Impossible de modifier ce type utilisateur car il n'existe pas dans la base de données.");
+        res.status(400).send("Impossible de modifier ce type utilisateur car il n'existe pas dans la base de données.");
     } else {
        const results = await db.query(typeUtilisateurQueries.updateTypeUtilisateur, [label, role, id])
 
-       if(results.rowCount && results.command === 'UPDATE')
-        res.status(200).send("Type utilisateur modifié avec succès !");
+       if(results.rowCount && results.command === 'UPDATE'){
+             res.status(200).send("Type utilisateur modifié avec succès !");
+       } else {
+        res.status(400).send("Erreur")
+       }
+       
     }
 } 
 

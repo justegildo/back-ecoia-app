@@ -3,11 +3,11 @@ require('dotenv').config({path: './src/config/.env'});
 
 
 const swaggerDefinition = {
-  openapi: '3.0.0',
+  openapi: '3.0.3',
   //basePath: '../back/src/components/schemas',
   info: {
     title: 'API REST',
-    version: '1.0.0',
+    version: '1.0.11',
     description: 'API of EcoiaApp',
     license: {
       name: "ECOIA",
@@ -217,11 +217,209 @@ const swaggerDefinition = {
             "type": "string"
           },
           "classes": {
-            "type": "string"
+            "type": "array",
           }
         },
         "required": [
           "nom", "programme_educatifs", "activites", "resultats", "raison_sociale", "niveau_id", "classes"
+        ]
+      },
+
+      Maternelle:{
+        "type": "object",
+        "properties": {
+          "nom": {
+            "type": "string"
+          },
+          "prenoms": {
+            "type": "string"
+          },
+          "date_naissance": {
+            "type": "string"
+          },
+          "lieu_naissance": {
+            "type": "string"
+          },
+          "sexe": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "annee_academique": {
+            "type": "string"
+          },
+          "niveau_etude": {
+            "type": "string"
+          },
+          "ecole_id": {
+            "type": "string"
+          },
+          "parrainages_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nom", "prenoms", "date_naissance", "lieu_naissance", "sexe", "niveau_etude", "ecole_id"
+        ]
+      },
+
+      Primaire:{
+        "type": "object",
+        "properties": {
+          "nom": {
+            "type": "string"
+          },
+          "prenoms": {
+            "type": "string"
+          },
+          "date_naissance": {
+            "type": "string"
+          },
+          "lieu_naissance": {
+            "type": "string"
+          },
+          "sexe": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "annee_academique": {
+            "type": "string"
+          },
+          "niveau_etude": {
+            "type": "string"
+          },
+          "filiere": {
+            "type": "string"
+          },
+          "ecole_id": {
+            "type": "string"
+          },
+          "parrainages_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nom", "prenoms", "date_naissance", "lieu_naissance", "sexe", "niveau_etude", "ecole_id"
+        ]
+      },
+
+      Lycee:{
+        "type": "object",
+        "properties": {
+          "nom": {
+            "type": "string"
+          },
+          "prenoms": {
+            "type": "string"
+          },
+          "date_naissance": {
+            "type": "string"
+          },
+          "lieu_naissance": {
+            "type": "string"
+          },
+          "sexe": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "annee_academique": {
+            "type": "string"
+          },
+          "niveau_etude": {
+            "type": "string"
+          },
+          "ecole_id": {
+            "type": "string"
+          },
+          "parrainages_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nom", "prenoms", "date_naissance", "lieu_naissance", "sexe", "niveau_etude", "ecole_id"
+        ]
+      },
+
+      College:{
+        "type": "object",
+        "properties": {
+          "nom": {
+            "type": "string"
+          },
+          "prenoms": {
+            "type": "string"
+          },
+          "date_naissance": {
+            "type": "string"
+          },
+          "lieu_naissance": {
+            "type": "string"
+          },
+          "sexe": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "annee_academique": {
+            "type": "string"
+          },
+          "niveau_etude": {
+            "type": "string"
+          },
+          "ecole_id": {
+            "type": "string"
+          },
+          "parrainages_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nom", "prenoms", "date_naissance", "lieu_naissance", "sexe", "niveau_etude", "ecole_id"
+        ]
+      },
+
+      Universite:{
+        "type": "object",
+        "properties": {
+          "nom": {
+            "type": "string"
+          },
+          "prenoms": {
+            "type": "string"
+          },
+          "date_naissance": {
+            "type": "string"
+          },
+          "lieu_naissance": {
+            "type": "string"
+          },
+          "sexe": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "annee_academique": {
+            "type": "string"
+          },
+          "niveau_etude": {
+            "type": "string"
+          },
+          "ecole_id": {
+            "type": "string"
+          },
+          "parrainages_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nom", "prenoms", "date_naissance", "lieu_naissance", "sexe", "niveau_etude", "ecole_id"
         ]
       }
 

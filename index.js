@@ -14,6 +14,11 @@ const niveauCollegeRoutes = require('../back/src/routes/niveau.college.routes')
 const niveauLyceeRoutes = require('../back/src/routes/niveau.lycee.routes')
 const niveauUniversiteRoutes = require('../back/src/routes/niveau.universite.routes')
 const ecoleRoutes = require('../back/src/routes/ecole.routes')
+const maternelleRoutes = require('../back/src/routes/maternelle.routes')
+const primaireRoutes = require('../back/src/routes/primaire.routes')
+const lyceeRoutes = require('../back/src/routes/lycee.routes')
+const collegeRoutes = require('../back/src/routes/college.routes')
+const universiteRoutes = require('../back/src/routes/universite.routes')
 const {startApp} = require('./started')
 const verifyAuthToken = require ('./src/middleware/middleware')
 
@@ -57,6 +62,21 @@ app.use('/api/niveau-universite', /*verifyAuthToken, */ niveauUniversiteRoutes);
 
 //ecole
 app.use('/api/ecole', /*verifyAuthToken, */ ecoleRoutes);
+
+//maternelle
+app.use('/api/maternelle', /*verifyAuthToken, */ maternelleRoutes);
+
+//primaire
+app.use('/api/primaire', /*verifyAuthToken, */ primaireRoutes);
+
+//lycee
+app.use('/api/lycee', /*verifyAuthToken, */ lyceeRoutes);
+
+//college
+app.use('/api/college', /*verifyAuthToken, */ collegeRoutes);
+
+//universite
+app.use('/api/universite', /*verifyAuthToken, */ universiteRoutes);
 
 //le port
 app.listen(process.env.SERVEUR_PORT, () => 

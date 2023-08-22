@@ -55,14 +55,18 @@ module.exports.updateEcole = async (req, res) => {
     const noEcoleFound = !result.rows.length;
  
     if (noEcoleFound) {
-        res.send("Impossible de modifier cette école car il n'existe pas dans la base de données.");
+        res.status(400).send("Impossible de modifier cette école car il n'existe pas dans la base de données.");
     } else {
         const results = await db.query(ecoleQueries.updateEcole, 
             [nom, programme_educatifs, activites, resultats, raison_sociale, niveau_id, classes, id]
         )
 
-       if(results.rowCount && results.command === 'UPDATE')
-        res.status(200).send("Ecole modifié avec succès !");
+       if(results.rowCount && results.command === 'UPDATE'){
+            res.status(200).send("Ecole modifié avec succès !");
+       } else {
+            res.status(400).send("Erreur")
+       }
+        
     }
 } 
 
@@ -84,7 +88,7 @@ module.exports.deleteEcole = async(req, res) => {
         if (result) {
             res.status(200).send("Ecole supprimé avec succès");
         } else {
-
+            res.status(400).send("Erreur")
         }
     }
 } 

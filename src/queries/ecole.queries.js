@@ -1,8 +1,8 @@
 //const getAllEcoles = "SELECT * FROM ecole"; 
 
-const getAllEcoles = "SELECT ecole.nom, ecole.programme_educatifs, activites, resultats, niveau.label AS niveau, classes FROM ecole JOIN niveau ON ecole.niveau_id = niveau.id"
+const getAllEcoles = "SELECT ecole.id, ecole.nom, ecole.programme_educatifs, ecole.activites, ecole.resultats, niveau.label AS niveau, ecole.classes FROM ecole JOIN niveau ON ecole.niveau_id = niveau.id"
 
-const getEcoleById = "SELECT * FROM ecole WHERE id = $1 ";
+const getEcoleById = "SELECT ecole.id, ecole.nom, ecole.programme_educatifs, ecole.activites, ecole.resultats, niveau.label AS niveau, ecole.classes FROM ecole JOIN niveau ON ecole.niveau_id = niveau.id WHERE ecole.id = $1 ";
 
 const addEcole = "INSERT INTO ecole (nom, programme_educatifs, activites, resultats, raison_sociale, niveau_id, classes) VALUES ($1, $2, $3, $4, $5, $6, $7 )";
 
