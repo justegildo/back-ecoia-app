@@ -19,7 +19,8 @@ const primaireRoutes = require('../back/src/routes/primaire.routes')
 const lyceeRoutes = require('../back/src/routes/lycee.routes')
 const collegeRoutes = require('../back/src/routes/college.routes')
 const universiteRoutes = require('../back/src/routes/universite.routes')
-const {startApp} = require('./started')
+const filestoreRoutes = require('../back/src/routes/filestore.routes')
+const parrainageRoutes = require('../back/src/routes/parrainage.routes')
 const verifyAuthToken = require ('./src/middleware/middleware')
 
 app.use(express.json());
@@ -77,6 +78,12 @@ app.use('/api/college', /*verifyAuthToken, */ collegeRoutes);
 
 //universite
 app.use('/api/universite', /*verifyAuthToken, */ universiteRoutes);
+
+//filestore
+app.use('/api/file-upload', filestoreRoutes);
+
+//filestore
+app.use('/api/parrainage', parrainageRoutes);
 
 //le port
 app.listen(process.env.SERVEUR_PORT, () => 

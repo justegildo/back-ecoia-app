@@ -3,11 +3,11 @@ require('dotenv').config({path: './src/config/.env'});
 
 
 const swaggerDefinition = {
-  openapi: '3.0.3',
+  openapi: '3.0.0',
   //basePath: '../back/src/components/schemas',
   info: {
     title: 'API REST',
-    version: '1.0.11',
+    version: '1.0.0',
     description: 'API of EcoiaApp',
     license: {
       name: "ECOIA",

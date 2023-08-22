@@ -2,7 +2,6 @@ const db = require("../config/dbConfig");
 const utilisateurQueries = require('../queries/utilisateur.queries');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
-const { startApp } = require('../../started')
 
 
 //afficher tous les utilisateurs
