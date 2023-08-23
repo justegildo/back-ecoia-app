@@ -46,7 +46,7 @@ module.exports.signIn = async (req, res) => {
 
        const token = jwt.sign(
          { name: user.name, email: user.email },
-         process.env.TOKEN_KEY,
+          process.env.TOKEN_KEY,
          { expiresIn: process.env.TOKEN_DURING }
        );
          
