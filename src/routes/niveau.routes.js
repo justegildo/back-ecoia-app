@@ -36,6 +36,8 @@ router.post("/add", niveauController.addNiveau);
  *     responses:
  *       200:
  *         description: Liste des types utilisateurs récupérés avec succès.
+ *       404:
+ *         description: Pas de données.
  */
 router.get('/', niveauController.getAllNiveaux);
 
@@ -89,7 +91,7 @@ router.get('/:id', niveauController.getNiveauById);
  *       200:
  *         description: Niveau mis à jour avec succès.
  *       400:
- *         description: Données d'entrée non valid
+ *         description: Données d'entrée non valide
 */
 router.put('/:id', niveauController.updateNiveau);
 
@@ -111,7 +113,7 @@ router.put('/:id', niveauController.updateNiveau);
  *     responses:
  *       200:
  *         description: Niveau supprimé avec succès.
- *       404:
+ *       400:
  *         description: Niveau non trouvé.
  */
 
@@ -120,24 +122,24 @@ router.delete('/:id', niveauController.deleteNiveau);
 
 /**
  * @swagger
- * /api/niveau/{id}:
+ * /api/niveau/type/{type}:
  *   get:
- *     summary: Récupérer un Niveau par son identifiant
+ *     summary: Récupérer la liste des classes par le nom du niveau
  *     tags:
  *      - Niveau
- *     description: Renvoie un Niveau en fonction de son identifiant.
+ *     description: Renvoie une liste des classes de son identifiant.
  *     parameters:
- *       - name: id
+ *       - name: type
  *         in: path
  *         required: true
  *         description: Identifiant du Niveau à récupérer
  *         schema:
- *           type: integer
+ *           type: string
  *     responses:
  *       200:
- *         description: Niveau récupéré avec succès.
- *       404:
- *         description: Niveau non trouvé.
+ *         description: Liste des classes récupéré avec succès.
+ *       400:
+ *         description: Pas de données.
  */
 router.get('/type/:type', niveauController.getClassesByNiveau);
 

@@ -1,8 +1,8 @@
-const getAllUtilisateurs = "SELECT nom, prenoms, email, telephone, sexe FROM utilisateur"; 
+const getAllUtilisateurs = "SELECT id, nom, prenoms, email, telephone, sexe, roles FROM utilisateur"; 
 
 const getUser = "SELECT CONCAT(nom, ' ', prenoms) AS name, email, password, is_active FROM utilisateur WHERE email = $1";
 
-const getUtilisateurById = "SELECT nom, prenoms, email, telephone, sexe FROM utilisateur WHERE id = $1 ";
+const getUtilisateurById = "SELECT id, nom, prenoms, email, telephone, sexe, roles FROM utilisateur WHERE id = $1 ";
 
 const checkEmailExists = "SELECT * FROM utilisateur WHERE email = $1 ";
 

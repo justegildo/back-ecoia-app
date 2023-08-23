@@ -11,7 +11,7 @@ module.exports.getAllNiveaux = async (req, res) => {
     if(results.rowCount){
         res.status(200).json(results.rows);
     } else {
-        res.status(400).send("Pas de données disponible")
+        res.status(404).send("Pas de données disponible")
     }
 }
 
@@ -25,7 +25,7 @@ module.exports.getNiveauById = async(req, res) =>{
     if(result.rowCount){
         res.status(200).json(result.rows);
     } else {
-        res.status(400).send("Ce niveau n'existe pas")
+        res.status(404).send("Ce niveau n'existe pas")
     }
 } 
 
@@ -37,7 +37,7 @@ module.exports.addNiveau =  async (req, res) => {
     const result = await db.query(niveauQueries.addNiveau, [label, type])
 
     if(result.rowCount && result.command === 'INSERT'){
-        res.status(201).send("Niveau créee avec succès !");
+        res.status(200).send("Niveau créee avec succès !");
     } else {
         res.status(400).json("Impossible d'ajouter")
     }
@@ -53,7 +53,7 @@ module.exports.updateNiveau = async (req, res) => {
     const noNiveauFound = !result.rows.length;
 
     if (noNiveauFound) {
-        res.send("Impossible de modifier ce niveau car il n'existe pas dans la base de données.");
+        res.status(400).send("Impossible de modifier ce niveau car il n'existe pas dans la base de données.");
     } else {
        const results = await db.query(niveauQueries.updateNiveau, [label, type, id])
 
@@ -73,7 +73,7 @@ module.exports.deleteNiveau = async(req, res) => {
 
     const noNiveauFound = !results.rows.length;
     if (noNiveauFound) {
-        res.send("Impossible de supprimer ce niveau car il n'existe pas dans la base de données. ");
+        res.status(400).send("Impossible de supprimer ce niveau car il n'existe pas dans la base de données. ");
     } else {
         const result = await db.query(niveauQueries.deleteNiveau, [id])
         //console.log(result);
@@ -104,27 +104,20 @@ module.exports.getClassesByNiveau = async(req, res) =>{
 
     const result5 = await db.query(niveauQueries.getAllNiveauColleges)
 
-    if(type === 'PRIMAIRE'){
+    const results = {
+        'PRIMAIRE': result1.rows,
+        'MATERNELLE': result2.rows,
+        'LYCEE': result3.rows,
+        'UNIVERSITE': result4.rows,
+        'COLLEGE': result5.rows
+    };
+
+    if (results.hasOwnProperty(type)) {
+
+        res.status(200).json(results[type]);
+
+    } else {
         
-        res.status(200).json(result1.rows)
-
-    } else if(type === 'MATERNELLE'){
-        console.log(type);
-        res.status(200).json(result2.rows)
-
-    } else if(type === 'LYCEE'){
-        console.log(type);
-        res.status(200).json(result3.rows)
-
-    } else if(type === 'UNIVERSITE') {
-        console.log(type);
-        res.status(200).json(result4.rows)
-
-    } else if(type === 'COLLEGE'){
-        console.log(type);
-        res.status(200).json(result5.rows)
-
-    }
-
-    
+        res.status(400).json({ error: 'Type non valide' });
+    } 
 } 

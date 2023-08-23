@@ -85,7 +85,9 @@ router.post('/update-password', verifyAuthToken, authController.updatePassword);
  *     description: Renvoie une liste de tous les utilisateurs.
  *     responses:
  *       200:
- *         description: Liste d'utilisateurs récupérée avec succès.
+ *         description: Liste des utilisateurs récupérés avec succès.
+ *       404:
+ *          description: Pas de données.
  */
 router.get('/', verifyAuthToken, utilisateurController.getAllUtilisateurs);
 
@@ -138,8 +140,8 @@ router.get('/:id', verifyAuthToken, utilisateurController.getUtilisateurById);
  *     responses:
  *       200:
  *         description: Utilisateur mis à jour avec succès.
- *       400:
- *         description: Données d'entrée non valid
+ *       404:
+ *         description: Données d'entrée non valide
 */
 router.put('/:id', verifyAuthToken, utilisateurController.updateUtilisateur);
 
@@ -161,7 +163,7 @@ router.put('/:id', verifyAuthToken, utilisateurController.updateUtilisateur);
  *     responses:
  *       200:
  *         description: Utilisateur supprimé avec succès.
- *       404:
+ *       401:
  *         description: Utilisateur non trouvé.
  */
 
@@ -202,7 +204,7 @@ router.put('/enable-account/:id', verifyAuthToken, authController.enableAccount)
  *     description: Désactiver un compte en fonction de son identifiant.
  *     parameters:
  *       - name: id
- *         in: path
+ *         in: formData
  *         required: true
  *         description: Identifiant du compte de l'utilisateur à désactiver
  *         schema:
@@ -220,22 +222,21 @@ router.put('/disable-account/:id', verifyAuthToken, authController.disableAccoun
  * @swagger
  * /api/user/reset-password:
  *   post:
- *     summary: Réinitialisé un mot de passe
+ *     summary: Réinitialisé son mot de passe
  *     tags:
  *      - Utilisateur
- *     description: Réinitialisé un mot de passe en fonction de son email.
- *     parameters:
- *       - name: email
- *         in: path
- *         required: true
- *         description: L'email du mot de passe à réinitialisé
- *         schema:
- *           type: string
+ *     description: Réinitialisé son mot de passe.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ResetPassword'
  *     responses:
- *       200:
+ *       201:
  *         description: Mot de passe réinitialisé avec succès.
  *       400:
- *         description: Données d'entrée non valide
+ *         description: Impossible de réinitialisé le mot de passe.
 */
 router.post('/reset-password', verifyAuthToken, authController.resetPassword);
 

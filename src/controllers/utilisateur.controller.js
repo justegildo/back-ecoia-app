@@ -6,27 +6,36 @@ const nodemailer = require('nodemailer');
 
 //afficher tous les utilisateurs
 module.exports.getAllUtilisateurs = async (req, res) => {
-    db.query(utilisateurQueries.getAllUtilisateurs, (error, results) => {
-        if (error) throw error;
 
-       res.status(200).json(results.rows);
-    })
+    const results = await db.query(utilisateurQueries.getAllUtilisateurs)
+    //console.log(result.rowCount);
+
+    if(results.rowCount){
+        res.status(200).json(results.rows);
+    } else {
+        res.status(401).send("Pas de données disponible")
+    }
 }
 
 // récupérer une utilisateur
-module.exports.getUtilisateurById = (req, res) => {
+module.exports.getUtilisateurById = async(req, res) => {
+
     const id = parseInt(req.params.id);
-    db.query(utilisateurQueries.getUtilisateurById, [id], (error, results) => {
-        if (error) throw error;
-        res.status(200).json(results.rows);
-    })
+
+    const result = await db.query(utilisateurQueries.getUtilisateurById, [id])
+    //console.log(result.rowCount);
+
+    if(result.rowCount){
+        res.status(200).json(result.rows);
+    } else {
+        res.status(401).send("Cet utilisateur n'existe pas")
+    }
 }
 
 //ajouter une utilisateur
 module.exports.addUtilisateur = async (req, res) => {
     const { nom, prenoms, sexe, email, telephone, password, roles } = req.body;
     //console.log(req.body);
-    var hashPassword = bcrypt.hashSync(password);
 
     const result = await db.query(utilisateurQueries.checkEmailExists, [email]);
 
@@ -35,6 +44,7 @@ module.exports.addUtilisateur = async (req, res) => {
     } else {
         try {
             // Insert the new user into the database
+            var hashPassword = bcrypt.hashSync(password);
             const results = await db.query(utilisateurQueries.addUtilisateur, 
                 [nom, prenoms, sexe, email, telephone, hashPassword, roles])
             
@@ -61,9 +71,9 @@ module.exports.addUtilisateur = async (req, res) => {
                 let mailOptions = {
                     from: process.env.SENDER_MAIL, // sender address
                     to: req.body.email, // list of receivers
-                    subject: 'Re-Recipe', // Subject line
+                    subject: 'EcoiaApp', // Subject line
                     text: "Inscription réussie avec succès ! ", // plain text body
-                    html: `<p>${prenoms + ' ' + nom} une très chaleureuse bienvenue à vous sur notre plateforme Re-Recipe ! C\est agréable de vous avoir parmi nous ! </p><br> `
+                    html: `<p>${prenoms + ' ' + nom} une très chaleureuse bienvenue à vous sur notre plateforme EcoiaApp ! C\est agréable de vous avoir parmi nous ! </p><br> `
                 };
 
                 transporter.sendMail(mailOptions, (error, info) => {
@@ -131,7 +141,7 @@ module.exports.deleteUtilisateur = async(req, res) => {
         if (result) {
             res.status(200).send("Utilisateur supprimé avec succès");
         } else {
-
+            res.status(401).send("Erreur")
         }
     }
 }

@@ -1,6 +1,7 @@
-//const getAllEcoles = "SELECT * FROM ecole"; 
+const getAllEcoles = "SELECT e.id, e.nom, e.programme_educatifs, e.activites, e.resultats, e.classes, jsonb_build_object('id', n.id, 'label', n.label, 'type', n.type ) AS niveau FROM ecole AS e JOIN niveau AS n ON e.niveau_id = n.id";
+ 
 
-const getAllEcoles = "SELECT ecole.id, ecole.nom, ecole.programme_educatifs, ecole.activites, ecole.resultats, niveau.label AS niveau, ecole.classes FROM ecole JOIN niveau ON ecole.niveau_id = niveau.id"
+//const getAllEcoles = "SELECT ecole.id, ecole.nom, ecole.programme_educatifs, ecole.activites, ecole.resultats, niveau.label AS niveau, ecole.classes FROM ecole JOIN niveau ON ecole.niveau_id = niveau.id"
 
 const getEcoleById = "SELECT ecole.id, ecole.nom, ecole.programme_educatifs, ecole.activites, ecole.resultats, niveau.label AS niveau, ecole.classes FROM ecole JOIN niveau ON ecole.niveau_id = niveau.id WHERE ecole.id = $1 ";
 

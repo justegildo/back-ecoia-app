@@ -65,8 +65,8 @@ const swaggerDefinition = {
           "password": {
             "type": "string"
           },
-          "typeUtilisateurId": {
-            "type": "number",
+          "roles": {
+            "type": "string",
             //"format": "number"
           },
         },
@@ -94,6 +94,9 @@ const swaggerDefinition = {
            "telephone": {
              "type": "string",
              "format": "number"
+           },
+           "roles": {
+             "type": "string"
            }
            },
            "required": [ 
@@ -143,10 +146,13 @@ const swaggerDefinition = {
           "email": {
             "type": "string",
             "format": "email"
+          },
+          "newPassword": {
+            "type": "string"
           }
         },
         "required": [
-          "email"
+          "email", "newPassword"
         ]
       },
 
