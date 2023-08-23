@@ -36,6 +36,8 @@ router.post("/add", niveauMaternelleController.addNiveauMaternelle);
  *     responses:
  *       200:
  *         description: Liste des classes récupérés avec succès.
+ *       400:
+ *         description: Liste des classes récupérés avec succès.
  */
 router.get('/', niveauMaternelleController.getAllNiveauMaternelles);
 
@@ -68,7 +70,7 @@ router.get('/:id', niveauMaternelleController.getNiveauMaternelleById);
  * @swagger
  * /api/niveau-maternelle/{id}:
  *   put:
- *     summary: Mettre à jour une cl○7sse
+ *     summary: Mettre à jour une classe
  *     tags:
  *      - Niveau maternelle
  *     description: Met à jour une classe en fonction de son identifiant.

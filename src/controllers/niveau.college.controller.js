@@ -30,13 +30,13 @@ module.exports.getNiveauCollegeById = async(req, res) =>{
 
 //env
 module.exports.addNiveauCollege =  async (req, res) => {
-    const { label, classe } = req.body;
+    const { label, name } = req.body;
 
     //ajouter un NiveauCollege
-    const result = await db.query(niveauCollegeQueries.addNiveauCollege, [label, classe])
+    const result = await db.query(niveauCollegeQueries.addNiveauCollege, [label, name])
 
     if(result.rowCount && result.command === 'INSERT'){
-        res.status(201).send("Classe créee avec succès !");
+        res.status(200).send("Classe créee avec succès !");
     } else {
         res.status(400).json("Impossible d'ajouter")
     }
@@ -46,7 +46,7 @@ module.exports.addNiveauCollege =  async (req, res) => {
 //modifier un NiveauCollege
 module.exports.updateNiveauCollege = async (req, res) => {
     const id = parseInt(req.params.id);
-    const { label, classe } = req.body;
+    const { label, name } = req.body;
 
     const result = await db.query(niveauCollegeQueries.getNiveauCollegeById, [id])
     const noNiveauCollegeFound = !result.rows.length;
@@ -54,7 +54,7 @@ module.exports.updateNiveauCollege = async (req, res) => {
     if (noNiveauCollegeFound) {
         res.send("Impossible de modifier ce NiveauCollege car il n'existe pas dans la base de données.");
     } else {
-       const results = await db.query(niveauCollegeQueries.updateNiveauCollege, [label, classe, id])
+       const results = await db.query(niveauCollegeQueries.updateNiveauCollege, [label, name, id])
 
        if(results.rowCount && results.command === 'UPDATE')
         res.status(200).send("Classe modifié avec succès !");

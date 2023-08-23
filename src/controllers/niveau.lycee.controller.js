@@ -30,10 +30,10 @@ module.exports.getNiveauLyceeById = async(req, res) =>{
 
 //env
 module.exports.addNiveauLycee =  async (req, res) => {
-    const { label, classe } = req.body;
+    const { label, name } = req.body;
 
     //ajouter un NiveauLycee
-    const result = await db.query(niveauLyceeQueries.addNiveauLycee, [label, classe])
+    const result = await db.query(niveauLyceeQueries.addNiveauLycee, [label, name])
 
     if(result.rowCount && result.command === 'INSERT'){
         res.status(201).send("Classe créee avec succès !");
@@ -46,7 +46,7 @@ module.exports.addNiveauLycee =  async (req, res) => {
 //modifier un NiveauLycee
 module.exports.updateNiveauLycee = async (req, res) => {
     const id = parseInt(req.params.id);
-    const { label, classe } = req.body;
+    const { label, name } = req.body;
 
     const result = await db.query(niveauLyceeQueries.getNiveauLyceeById, [id])
     const noNiveauLyceeFound = !result.rows.length;
@@ -54,7 +54,7 @@ module.exports.updateNiveauLycee = async (req, res) => {
     if (noNiveauLyceeFound) {
         res.send("Impossible de modifier cette classe car il n'existe pas dans la base de données.");
     } else {
-       const results = await db.query(niveauLyceeQueries.updateNiveauLycee, [label, classe, id])
+       const results = await db.query(niveauLyceeQueries.updateNiveauLycee, [label, name, id])
 
        if(results.rowCount && results.command === 'UPDATE')
         res.status(200).send("Classe modifié avec succès !");

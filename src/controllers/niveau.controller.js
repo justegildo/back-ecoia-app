@@ -31,10 +31,10 @@ module.exports.getNiveauById = async(req, res) =>{
 
 //env
 module.exports.addNiveau =  async (req, res) => {
-    const { label, type } = req.body;
+    const { label, name } = req.body;
 
     //ajouter un niveau
-    const result = await db.query(niveauQueries.addNiveau, [label, type])
+    const result = await db.query(niveauQueries.addNiveau, [label, name])
 
     if(result.rowCount && result.command === 'INSERT'){
         res.status(200).send("Niveau créee avec succès !");
@@ -47,7 +47,7 @@ module.exports.addNiveau =  async (req, res) => {
 //modifier un niveau
 module.exports.updateNiveau = async (req, res) => {
     const id = parseInt(req.params.id);
-    const { label, type } = req.body;
+    const { label, name } = req.body;
 
     const result = await db.query(niveauQueries.getNiveauById, [id])
     const noNiveauFound = !result.rows.length;
@@ -55,7 +55,7 @@ module.exports.updateNiveau = async (req, res) => {
     if (noNiveauFound) {
         res.status(400).send("Impossible de modifier ce niveau car il n'existe pas dans la base de données.");
     } else {
-       const results = await db.query(niveauQueries.updateNiveau, [label, type, id])
+       const results = await db.query(niveauQueries.updateNiveau, [label, name, id])
 
        if(results.rowCount && results.command === 'UPDATE')
         res.status(200).send("Niveau modifié avec succès !");
@@ -118,6 +118,6 @@ module.exports.getClassesByNiveau = async(req, res) =>{
 
     } else {
         
-        res.status(400).json({ error: 'Type non valide' });
+        res.status(400).json({ Error: 'Type niveau non valide' });
     } 
 } 

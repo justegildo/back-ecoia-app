@@ -6,7 +6,7 @@ const niveauController = require('../controllers/niveau.controller');
  * @swagger
  * /api/niveau/add:
  *   post:
- *     summary: Créer un nouveau Niveau
+ *     summary: Créer un nouveau niveau
  *     tags:
  *      - Niveau
  *     description: Crée un nouveau Niveau avec les informations fournies.
@@ -46,10 +46,10 @@ router.get('/', niveauController.getAllNiveaux);
  * @swagger
  * /api/niveau/{id}:
  *   get:
- *     summary: Récupérer un Niveau par son identifiant
+ *     summary: Récupérer un niveau par son identifiant
  *     tags:
  *      - Niveau
- *     description: Renvoie un Niveau en fonction de son identifiant.
+ *     description: Renvoie un niveau en fonction de son identifiant.
  *     parameters:
  *       - name: id
  *         in: path
@@ -70,15 +70,15 @@ router.get('/:id', niveauController.getNiveauById);
  * @swagger
  * /api/niveau/{id}:
  *   put:
- *     summary: Mettre à jour un Niveau
+ *     summary: Mettre à jour un niveau
  *     tags:
  *      - Niveau
- *     description: Met à jour un Niveau en fonction de son identifiant.
+ *     description: Met à jour un niveau en fonction de son identifiant.
  *     parameters:
  *       - name: id
  *         in: path
  *         required: true
- *         description: Identifiant du Niveau à mettre à jour
+ *         description: Identifiant du niveau à mettre à jour
  *         schema:
  *           type: integer
  *     requestBody:
@@ -99,10 +99,10 @@ router.put('/:id', niveauController.updateNiveau);
  * @swagger
  * /api/niveau/{id}:
  *   delete:
- *     summary: Supprimer un Niveau
+ *     summary: Supprimer un niveau
  *     tags:
  *      - Niveau
- *     description: Supprime un Niveau en fonction de son identifiant.
+ *     description: Supprime un niveau en fonction de son identifiant.
  *     parameters:
  *       - name: id
  *         in: path
@@ -132,7 +132,7 @@ router.delete('/:id', niveauController.deleteNiveau);
  *       - name: type
  *         in: path
  *         required: true
- *         description: Identifiant du Niveau à récupérer
+ *         description: Identifiant du niveau à récupérer
  *         schema:
  *           type: string
  *     responses:

@@ -30,10 +30,10 @@ module.exports.getNiveauMaternelleById = async(req, res) =>{
 
 //env
 module.exports.addNiveauMaternelle =  async (req, res) => {
-    const { label, classe } = req.body;
+    const { label, name } = req.body;
 
     //ajouter un NiveauMaternelle
-    const result = await db.query(niveauMaternelleQueries.addNiveauMaternelle, [label, classe])
+    const result = await db.query(niveauMaternelleQueries.addNiveauMaternelle, [label, name])
 
     if(result.rowCount && result.command === 'INSERT'){
         res.status(201).send("Classe créee avec succès !");
@@ -46,7 +46,7 @@ module.exports.addNiveauMaternelle =  async (req, res) => {
 //modifier un NiveauMaternelle
 module.exports.updateNiveauMaternelle = async (req, res) => {
     const id = parseInt(req.params.id);
-    const { label, classe } = req.body;
+    const { label, name } = req.body;
 
     const result = await db.query(niveauMaternelleQueries.getNiveauMaternelleById, [id])
     const noNiveauMaternelleFound = !result.rows.length;
@@ -54,7 +54,7 @@ module.exports.updateNiveauMaternelle = async (req, res) => {
     if (noNiveauMaternelleFound) {
         res.send("Impossible de modifier cette classe car il n'existe pas dans la base de données.");
     } else {
-       const results = await db.query(niveauMaternelleQueries.updateNiveauMaternelle, [label, classe, id])
+       const results = await db.query(niveauMaternelleQueries.updateNiveauMaternelle, [label, name, id])
 
        if(results.rowCount && results.command === 'UPDATE')
         res.status(200).send("Classe modifié avec succès !");

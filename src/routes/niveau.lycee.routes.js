@@ -36,6 +36,8 @@ router.post("/add", niveauLyceeController.addNiveauLycee);
  *     responses:
  *       200:
  *         description: Liste des classes récupérés avec succès.
+ *       400:
+ *         description: Liste des classes récupérés avec succès.
  */
 router.get('/', niveauLyceeController.getAllNiveauLycees);
 

@@ -36,6 +36,8 @@ router.post("/add", niveauCollegeController.addNiveauCollege);
  *     responses:
  *       200:
  *         description: Liste des types utilisateurs récupérés avec succès.
+ *       400:
+ *         description: Liste des classes récupérés avec succès.
  */
 router.get('/', niveauCollegeController.getAllNiveauColleges);
 
