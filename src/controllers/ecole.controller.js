@@ -31,11 +31,11 @@ module.exports.getEcoleById = async(req, res) =>{
 
 //env
 module.exports.addEcole =  async (req, res) => {
-    const { nom, programme_educatifs, activites, resultats, raison_sociale, niveau_id, classes } = req.body;
+    const { nom, programme_educatifs, activites, resultats, raison_sociale, niveau_id, classes, latitude, longitude } = req.body;
 
     //ajouter un Ecole
     const result = await db.query(ecoleQueries.addEcole, 
-        [nom, programme_educatifs, activites, resultats, raison_sociale, niveau_id, classes]
+        [nom, programme_educatifs, activites, resultats, raison_sociale, niveau_id, classes, latitude, longitude]
     )
 
     if(result.rowCount && result.command === 'INSERT'){
@@ -92,3 +92,22 @@ module.exports.deleteEcole = async(req, res) => {
         }
     }
 } 
+
+
+module.exports.searchEcoles = async (req, res) => {
+    const { latitude, longitude, distanceMax } = req.body;
+    /* const latitude = 6.366600;
+    const longitude = 2.420200;
+    const distanceMax = 5700;  */
+    //console.log(req.body);
+
+    const result = await db.query(ecoleQueries.search, [latitude, longitude, distanceMax])
+    //console.log(result);  
+
+    if(result.rowCount){
+        res.status(200).json(result.rows);
+    } else {
+        res.status(400).send("Pas de données disponible")
+    }
+
+  }

@@ -224,10 +224,34 @@ const swaggerDefinition = {
           },
           "classes": {
             "type": "array",
+          },
+          "latitude": {
+            "type": "string",
+          },
+          "longitude": {
+            "type": "string",
           }
         },
         "required": [
           "nom", "programme_educatifs", "activites", "resultats", "raison_sociale", "niveau_id", "classes"
+        ]
+      },
+
+      SearchEcole: {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "string"
+          },
+          "longitude": {
+            "type": "string"
+          },
+          "distance_km": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "latitude", "longitude", "distance_km"
         ]
       },
 

@@ -118,4 +118,27 @@ router.put('/:id', ecoleController.updateEcole);
 router.delete('/:id', ecoleController.deleteEcole);  
 
 
+/**
+ * @swagger
+ * /api/ecole/recherche-ecoles:
+ *   post:
+ *     summary: Les écoles qui sont à proximité de l'utilisateur
+ *     tags:
+ *      - Ecole
+ *     description: Rechercher des ecoles avec les informations fournies.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/SearchEcole'
+ *     responses:
+ *       200:
+ *         description: Les écoles trouvées avec succès.
+ *       400:
+ *         description: Données d'entrée non valides.
+ */
+router.post("/recherche-ecoles", ecoleController.searchEcoles);
+
+
 module.exports = router;
