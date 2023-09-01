@@ -131,14 +131,14 @@ router.delete('/:id', ecoleController.deleteEcole);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/SearchEcole'
+ *             $ref: '#/components/schemas/SearchEcoleByPosition'
  *     responses:
  *       200:
  *         description: Les écoles trouvées avec succès.
  *       400:
  *         description: Données d'entrée non valides.
  */
-router.post("/recherche-ecoles", ecoleController.searchEcoles);
+router.post("/recherche-ecoles-position", ecoleController.searchEcolesByPosition);
 
 
 module.exports = router;

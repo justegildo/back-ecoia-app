@@ -237,7 +237,7 @@ const swaggerDefinition = {
         ]
       },
 
-      SearchEcole: {
+      SearchEcoleByPosition: {
         "type": "object",
         "properties": {
           "latitude": {

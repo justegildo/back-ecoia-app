@@ -11,7 +11,7 @@ const deleteEcole = "DELETE FROM ecole WHERE id = $1";
 
 const updateEcole = "UPDATE ecole SET nom = $1, programme_educatifs = $2, activites = $3, resultats = $4, raison_sociale = $5, niveau_id = $6, classes = $7 WHERE id = $8";
 
-const search = "SELECT id, nom, CONCAT(ROUND((ST_Distance(geom::geography, ST_SetSRID(ST_MakePoint(6.366600, 2.420200), 4326)::geography) / 1000)::numeric, 1), ' km') AS distance FROM ecole WHERE (ST_Distance(geom::geography, ST_SetSRID(ST_MakePoint($1, $2), 4326)::geography) / 1000) <= $3 ORDER BY distance;"
+const searchByPosition = "SELECT id, nom, CONCAT(ROUND((ST_Distance(geom::geography, ST_SetSRID(ST_MakePoint(6.366600, 2.420200), 4326)::geography) / 1000)::numeric, 1), ' km') AS distance FROM ecole WHERE (ST_Distance(geom::geography, ST_SetSRID(ST_MakePoint($1, $2), 4326)::geography) / 1000) <= $3 ORDER BY distance;"
 
 module.exports = {
     getAllEcoles,
@@ -19,5 +19,5 @@ module.exports = {
     addEcole,
     deleteEcole,
     updateEcole,
-    search
+    searchByPosition
 }

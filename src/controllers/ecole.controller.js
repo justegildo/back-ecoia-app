@@ -93,15 +93,12 @@ module.exports.deleteEcole = async(req, res) => {
     }
 } 
 
-
-module.exports.searchEcoles = async (req, res) => {
+//rechercher une école
+module.exports.searchEcolesByPosition = async (req, res) => {
     const { latitude, longitude, distanceMax } = req.body;
-    /* const latitude = 6.366600;
-    const longitude = 2.420200;
-    const distanceMax = 5700;  */
     //console.log(req.body);
 
-    const result = await db.query(ecoleQueries.search, [latitude, longitude, distanceMax])
+    const result = await db.query(ecoleQueries.searchByPosition, [latitude, longitude, distanceMax])
     //console.log(result);  
 
     if(result.rowCount){
