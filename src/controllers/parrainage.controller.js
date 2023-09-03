@@ -29,13 +29,16 @@ module.exports.getParrainageById = async(req, res) =>{
     }
 } 
 
+
 //env
 module.exports.addParrainage =  async (req, res) => {
-    const { date_parrainage, utilisateur_id, maternelle_id, primaire_id, lycee_id, college_id, universite_id } = req.body;
+    const { 
+        utilisateur_id, maternelle_id, primaire_id, lycee_id, college_id, universite_id 
+    } = req.body;
 
     //ajouter un Parrainage
     const result = await db.query(parrainageQueries.addParrainage, 
-        [date_parrainage, utilisateur_id, maternelle_id, primaire_id, lycee_id, college_id, universite_id]
+        [ utilisateur_id, maternelle_id, primaire_id, lycee_id, college_id, universite_id]
     )
 
     if(result.rowCount && result.command === 'INSERT'){
@@ -50,7 +53,7 @@ module.exports.addParrainage =  async (req, res) => {
 module.exports.updateParrainage = async (req, res) => {
     const id = parseInt(req.params.id);
     const { 
-        date_parrainage, utilisateur_id, maternelle_id, primaire_id, lycee_id, college_id, universite_id
+         utilisateur_id, maternelle_id, primaire_id, lycee_id, college_id, universite_id
     } = req.body;
 
     const result = await db.query(parrainageQueries.getParrainageById, [id])
@@ -60,7 +63,7 @@ module.exports.updateParrainage = async (req, res) => {
         res.status(400).send("Impossible de modifier cette école car il n'existe pas dans la base de données.");
     } else {
         const results = await db.query(parrainageQueries.updateParrainage, 
-            [date_parrainage, utilisateur_id, maternelle_id, primaire_id, lycee_id, college_id, universite_id, id]
+            [ utilisateur_id, maternelle_id, primaire_id, lycee_id, college_id, universite_id, id]
         )
 
        if(results.rowCount && results.command === 'UPDATE'){

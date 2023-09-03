@@ -31,11 +31,13 @@ module.exports.getEcoleById = async(req, res) =>{
 
 //env
 module.exports.addEcole =  async (req, res) => {
-    const { nom, programme_educatifs, activites, resultats, raison_sociale, niveau_id, classes, latitude, longitude } = req.body;
+    const { 
+        nom, programme_educatifs, activites, resultats, raison_sociale, niveau_id, classes, latitude, longitude, departement_id, commune_id, arrondissement_id, quartier_id 
+    } = req.body;
 
     //ajouter un Ecole
     const result = await db.query(ecoleQueries.addEcole, 
-        [nom, programme_educatifs, activites, resultats, raison_sociale, niveau_id, classes, latitude, longitude]
+        [nom, programme_educatifs, activites, resultats, raison_sociale, niveau_id, classes, latitude, longitude, departement_id, commune_id, arrondissement_id, quartier_id ]
     )
 
     if(result.rowCount && result.command === 'INSERT'){
@@ -49,7 +51,9 @@ module.exports.addEcole =  async (req, res) => {
 //modifier un Ecole
 module.exports.updateEcole = async (req, res) => {
     const id = parseInt(req.params.id);
-    const { nom, programme_educatifs, activites, resultats, raison_sociale, niveau_id, classes } = req.body;
+    const { 
+        nom, programme_educatifs, activites, resultats, raison_sociale, niveau_id, classes, departement_id, commune_id, arrondissement_id, quartier_id  
+    } = req.body;
 
     const result = await db.query(ecoleQueries.getEcoleById, [id])
     const noEcoleFound = !result.rows.length;
@@ -58,7 +62,7 @@ module.exports.updateEcole = async (req, res) => {
         res.status(400).send("Impossible de modifier cette école car il n'existe pas dans la base de données.");
     } else {
         const results = await db.query(ecoleQueries.updateEcole, 
-            [nom, programme_educatifs, activites, resultats, raison_sociale, niveau_id, classes, id]
+            [nom, programme_educatifs, activites, resultats, raison_sociale, niveau_id, classes, departement_id, commune_id, arrondissement_id, quartier_id,  id]
         )
 
        if(results.rowCount && results.command === 'UPDATE'){
@@ -93,7 +97,7 @@ module.exports.deleteEcole = async(req, res) => {
     }
 } 
 
-//rechercher une école
+//rechercher une école par position
 module.exports.searchEcolesByPosition = async (req, res) => {
     const { latitude, longitude, distanceMax } = req.body;
     //console.log(req.body);
@@ -106,5 +110,21 @@ module.exports.searchEcolesByPosition = async (req, res) => {
     } else {
         res.status(400).send("Pas de données disponible")
     }
+}
 
-  }
+
+//rechercher une école par position
+module.exports.searchEcoles = async (req, res) => {
+    const { departement, commune, arrondissement, quartier } = req.body;
+    //console.log(req.body);
+
+    const result = await db.query(ecoleQueries.search, [departement, commune, arrondissement, quartier])
+    //console.log(result);  
+
+    if(result.rowCount){
+        res.status(200).json(result.rows);
+    } else {
+        res.status(400).send("Pas de données disponible")
+    }
+
+}

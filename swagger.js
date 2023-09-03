@@ -230,6 +230,18 @@ const swaggerDefinition = {
           },
           "longitude": {
             "type": "string",
+          },
+          "departement_id": {
+            "type": "string",
+          },
+          "commune_id": {
+            "type": "string",
+          },
+          "arrondissement_id": {
+            "type": "string",
+          },
+          "quartier_id": {
+            "type": "string",
           }
         },
         "required": [
@@ -451,7 +463,34 @@ const swaggerDefinition = {
         "required": [
           "nom", "prenoms", "date_naissance", "lieu_naissance", "sexe", "niveau_etude", "ecole_id"
         ]
-      }
+      },
+
+      Parrainage:{
+        "type": "object",
+        "properties": {
+          "utilisateur_id": {
+            "type": "number"
+          },
+          "maternelle_id": {
+            "type": "number"
+          },
+          "primaire_id": {
+            "type": "number"
+          },
+          "lycee_id": {
+            "type": "number"
+          },
+          "college_id": {
+            "type": "number"
+          },
+          "universite_id": {
+            "type": "number"
+          },
+        },
+        "required": [
+          "utilisateur_id", "maternelle_id", "primaire_id", "lycee_id", "college_id", "universite_id"
+        ]
+      },
 
       
 

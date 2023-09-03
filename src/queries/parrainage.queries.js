@@ -14,11 +14,11 @@ const getParrainageByCollegeId = ""
 
 const getParrainageByUniversiteId = ""
 
-const addParrainage = "INSERT INTO parrainage (date_parrainage, utilisateur_id, maternelle_id, primaire_id, lycee_id, college_id, universite_id) VALUES ($1, $2, $3, $4, $5, $6, $7 )";
+const addParrainage = "INSERT INTO parrainage ( utilisateur_id, maternelle_id, primaire_id, lycee_id, college_id, universite_id) VALUES ($1, $2, $3, $4, $5, $6 )";
 
 const deleteParrainage = "DELETE FROM parrainage WHERE id = $1";
 
-const updateParrainage = "UPDATE parrainage SET date_parrainage = $1, utilisateur_id = $2, maternelle_id = $3, primaire_id = $4, lycee_id = $5, college_id = $6, universite_id = $7 WHERE id = $8";
+const updateParrainage = "UPDATE parrainage SET utilisateur_id = $1, maternelle_id = $2, primaire_id = $3, lycee_id = $4, college_id = $5, universite_id = $6 WHERE id = $7";
 
 module.exports = {
     getAllParrainages,
